@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 interface User {
   id: number;
@@ -9,13 +9,12 @@ interface User {
 }
 
 export default function Page() {
-  // const [users, setUsers] = useState<User[]>([]);
+  const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     fetch('/api/users')
       .then(response => response.json())
-      .then((data: User[]) => console.log(data)
-      )
+      .then((data: User[]) => setUsers(data))
       .catch(error => console.error('Error fetching users:', error));
   }, []);
 
@@ -34,12 +33,12 @@ export default function Page() {
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-3xl font-bold backdrop-brightness-50">
         <h1 className="mb-4">لیست کاربران</h1>
         <ul className="bg-black bg-opacity-50 p-4 rounded-lg">
-          {/* {users.map((user: User) => (
+          {users.map((user: User) => (
             <li key={user.id} className="flex items-center gap-4 mb-2">
               <img src={user.image} alt={user.firstName} className="w-10 h-10 rounded-full" />
               <span>{user.firstName} {user.lastName}</span>
             </li>
-          ))} */}
+          ))}
         </ul>
       </div>
     </div>
