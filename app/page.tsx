@@ -1,4 +1,5 @@
-import React from 'react';
+'use client'
+import React, { useEffect } from 'react';
 
 interface User {
   id: number;
@@ -10,12 +11,13 @@ interface User {
 export default function Page() {
   // const [users, setUsers] = useState<User[]>([]);
 
-  // useEffect(() => {
-  //   fetch('/api/users')
-  //     .then(response => response.json())
-  //     .then((data: User[]) => setUsers(data))
-  //     .catch(error => console.error('Error fetching users:', error));
-  // }, []);
+  useEffect(() => {
+    fetch('/api/users')
+      .then(response => response.json())
+      .then((data: User[]) => console.log(data)
+      )
+      .catch(error => console.error('Error fetching users:', error));
+  }, []);
 
   return (
     <div className="relative w-full h-screen overflow-hidden">
